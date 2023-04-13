@@ -1,0 +1,35 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class MovieSearch {
+
+    @Test
+    public void testSum() throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver","D:\\12345\\chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("file:///C:/xampp/htdocs/index.html");
+
+        WebElement searchInput = driver.findElement(By.id("search"));
+        WebElement getFileInfoButton = driver.findElement(By.id("get_api_res_btn"));
+        WebElement title = driver.findElement(By.id("title"));
+        WebElement year = driver.findElement(By.id("year"));
+        WebElement director = driver.findElement(By.id("director"));
+
+        searchInput.sendKeys("It");
+        getFileInfoButton.click();
+        Thread.sleep(3000);
+
+        Assert.assertEquals(title.getText(), "Title:It");
+        Assert.assertEquals(year.getText(), "Year:2017");
+        Assert.assertEquals(director.getText(), "Director:Andy Muschietti");
+
+    }
+
+
+
+}
